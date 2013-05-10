@@ -33,6 +33,7 @@ import org.uncommons.maths.random.CMWC4096RNG;
 import org.uncommons.maths.random.CellularAutomatonRNG;
 import org.uncommons.maths.random.JavaRNG;
 import org.uncommons.maths.random.MersenneTwisterRNG;
+import org.uncommons.maths.random.RdRandRNG;
 import org.uncommons.maths.random.XORShiftRNG;
 import org.uncommons.swing.SpringUtilities;
 
@@ -57,6 +58,7 @@ class RNGPanel extends JPanel
             rngs.put("Mersenne Twister", new MersenneTwisterRNG());
             rngs.put("SecureRandom", new SecureRandom());
             rngs.put("XOR Shift", new XORShiftRNG());
+            rngs.put("RdRand", new RdRandRNG());
         }
         catch (GeneralSecurityException ex)
         {
