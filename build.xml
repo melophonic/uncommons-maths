@@ -43,7 +43,7 @@
     </fileset>
   </path>
 
-  <property name="version" value="1.2.3"/>
+  <property name="version" value="1.2.4-SNAPSHOT"/>
   <property name="artifact.identifier" value="uncommons-maths-${version}"/>
 
   <!-- This is the minimum coverage percentage (for both lines and
@@ -253,6 +253,8 @@
              results.file="${docs.dir}/diehard/mersenne.txt" />
     <diehard rng.class="org.uncommons.maths.random.XORShiftRNG"
              results.file="${docs.dir}/diehard/xor.txt" />
+    <diehard rng.class="org.uncommons.maths.random.RdRandRNG"
+             results.file="${docs.dir}/diehard/xor.txt" />  	
     <!-- Test java.util.Random for comparison. -->
     <diehard rng.class="org.uncommons.maths.random.JavaRNG"
              results.file="${docs.dir}/diehard/java.txt" />
