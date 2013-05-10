@@ -11,7 +11,7 @@ import org.uncommons.maths.binary.BinaryUtils;
  *
  * @author Christopher McMahon
  */
-public class RdRandRNG extends Random implements RepeatableRNG
+public class RdRandRNG extends Random 
 {
     private static final int SEED_SIZE_BYTES = 8;
 
