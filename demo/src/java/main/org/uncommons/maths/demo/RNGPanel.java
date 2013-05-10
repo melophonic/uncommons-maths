@@ -15,6 +15,7 @@
 // ============================================================================
 package org.uncommons.maths.demo;
 
+import java.awt.event.ItemListener;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -92,5 +93,10 @@ class RNGPanel extends JPanel
     public int getIterations()
     {
         return iterationsNumberModel.getNumber().intValue();
+    }
+    
+    public void addRNGListener(ItemListener aListener) 
+    {
+    	rngCombo.addItemListener(aListener);
     }
 }

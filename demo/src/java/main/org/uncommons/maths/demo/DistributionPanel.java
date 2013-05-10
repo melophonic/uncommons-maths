@@ -77,4 +77,9 @@ class DistributionPanel extends JPanel
         ParametersPanel panel = parameterPanels.get(distributionCombo.getSelectedItem().toString());
         return panel.createProbabilityDistribution();
     }
+    
+    public void addDistributionListener(ItemListener aListener) 
+    {
+    	distributionCombo.addItemListener(aListener);
+    }
 }

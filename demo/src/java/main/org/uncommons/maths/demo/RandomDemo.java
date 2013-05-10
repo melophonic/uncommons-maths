@@ -20,6 +20,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Map;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -64,41 +66,58 @@ public class RandomDemo extends JFrame
         {
             public void actionPerformed(ActionEvent actionEvent)
             {
-                RandomDemo.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                new SwingBackgroundTask<GraphData>()
-                {
-                    private ProbabilityDistribution distribution;
-
-                    protected GraphData performTask()
-                    {
-                        distribution = distributionPanel.createProbabilityDistribution();
-
-                        Map<Double, Double> observedValues = distribution.generateValues(rngPanel.getIterations(),
-                                                                                         rngPanel.getRNG());
-                        Map<Double, Double> expectedValues = distribution.getExpectedValues();
-                        return new GraphData(observedValues,
-                                             expectedValues,
-                                             distribution.getExpectedMean(),
-                                             distribution.getExpectedStandardDeviation());
-                    }
-
-                    protected void postProcessing(GraphData data)
-                    {
-                        graphPanel.generateGraph(distribution.getDescription(),
-                                                 data.getObservedValues(),
-                                                 data.getExpectedValues(),
-                                                 data.getExpectedMean(),
-                                                 data.getExpectedStandardDeviation(),
-                                                 distribution.isDiscrete());
-                        RandomDemo.this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-                    }
-                }.execute();
-            }
+            	drawGraph();
+             }
         });
         controls.add(executeButton);
+        
+        final ItemListener itemListener = new ItemListener() {
+			
+			public void itemStateChanged(ItemEvent e) {
+				drawGraph();				
+			}
+		};
+        
+        // trigger redraw when universal parameter is changed
+        rngPanel.addRNGListener(itemListener);
+        distributionPanel.addDistributionListener(itemListener);
+        
         return controls;
     }
 
+    private void drawGraph() {
+        RandomDemo.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        new SwingBackgroundTask<GraphData>()
+        {
+            private ProbabilityDistribution distribution;
+
+            protected GraphData performTask()
+            {
+                distribution = distributionPanel.createProbabilityDistribution();
+
+                Map<Double, Double> observedValues = distribution.generateValues(rngPanel.getIterations(),
+                                                                                 rngPanel.getRNG());
+                Map<Double, Double> expectedValues = distribution.getExpectedValues();
+                return new GraphData(observedValues,
+                                     expectedValues,
+                                     distribution.getExpectedMean(),
+                                     distribution.getExpectedStandardDeviation());
+            }
+
+            protected void postProcessing(GraphData data)
+            {
+                graphPanel.generateGraph(distribution.getDescription(),
+                                         data.getObservedValues(),
+                                         data.getExpectedValues(),
+                                         data.getExpectedMean(),
+                                         data.getExpectedStandardDeviation(),
+                                         distribution.isDiscrete());
+                RandomDemo.this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            }
+        }.execute();
+    	
+    }
+    
     
     public static void main(String[] args)
     {
