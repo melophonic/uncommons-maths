@@ -28,7 +28,7 @@ import org.uncommons.swing.SpringUtilities;
  */
 class BinomialParametersPanel extends ParametersPanel
 {
-    private final SpinnerNumberModel trialsNumberModel = new SpinnerNumberModel(50, 1, 100, 1);
+    private final SpinnerNumberModel trialsNumberModel = new SpinnerNumberModel(50, 1, 1000, 1);
     private final SpinnerNumberModel probabilityNumberModel = new SpinnerNumberModel(0.5d, 0.0d, 1.0d, 0.01d);
 
     public BinomialParametersPanel()
