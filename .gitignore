@@ -10,3 +10,4 @@ website
 .classpath
 *.prefs
 */target
+*/test-output/*
