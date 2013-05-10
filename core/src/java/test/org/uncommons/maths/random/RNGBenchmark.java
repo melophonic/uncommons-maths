@@ -66,6 +66,7 @@ public class RNGBenchmark implements Runnable
         new RNGBenchmark(new CellularAutomatonRNG(), ITERATIONS).run();
         new RNGBenchmark(new CMWC4096RNG(), ITERATIONS).run();
         new RNGBenchmark(new XORShiftRNG(), ITERATIONS).run();
+        new RNGBenchmark(new RdRandRNG(), ITERATIONS).run();
         System.out.println("------------------------------------------------------------");
     }
 }
